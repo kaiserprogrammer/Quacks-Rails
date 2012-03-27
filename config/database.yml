@@ -19,7 +19,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
+  adapter: postgres
   encoding: utf8
   database: quacks
   pool: 5
