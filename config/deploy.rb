@@ -1,13 +1,25 @@
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require "rvm/capistrano"
+require "bundler/capistrano"
+set :rvm_ruby_string, '1.9.3'
+set :rvm_type, :user
+
+set :user, "deploy"
+set :runner, user
+set :use_sudo, false
+
 set :application, "quacks-rails"
-set :repository,  "set your repository location here"
+set :scm, :git
+set :repository,  "git@github.com:simpleprogrammer/Quacks-Rails.git"
 
-set :scm, :subversion
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :deploy_to, "/var/www/apps/#{application}"
+set :deploy_via, :remote_cache
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+set :domain, "juergenbickert.de"
+role :web, domain                          # Your HTTP server, Apache/etc
+role :app, domain                          # This may be the same as your `Web` server
+role :db,  domain, :primary => true # This is where Rails migrations will run
+#role :db,  ""# your slave db-server here
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
@@ -20,3 +32,7 @@ role :db,  "your slave db-server here"
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
+set :rails_env, "production"
+set :user, "deploy"
+set :runner, user
