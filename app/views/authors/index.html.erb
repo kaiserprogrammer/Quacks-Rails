@@ -9,7 +9,7 @@
 
 <% @view.authors.each do |author| %>
   <tr>
-    <td><img src="<%= author[:img_src] %>" /></td>
+    <td><img src="<%= author[:img_src] %>" height="<%= IMG_SIZE %>"/></td>
     <td><%= link_to author[:name], author_path(author[:id]) %></td>
     <td><%= author[:quote] %></td>
   </tr>

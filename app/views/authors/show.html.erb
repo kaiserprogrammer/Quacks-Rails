@@ -2,7 +2,7 @@
 <div class="author">
   <div class="author_image">
     <% if @view.author[:img_src] %>
-      <img src="<%= @view.author[:img_src] %>" />
+      <img src="<%= @view.author[:img_src] %>" height="<%= IMG_SIZE %>"/>
     <% else %>
       <%= link_to "Add Image", edit_image_path(@view.author[:id]) %>
     <% end %>

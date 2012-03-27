@@ -7,3 +7,6 @@ require_relative "../../app/views/users/user_view"
 
 db = YAML.load(File.new(Rails.root + "config/database.yml"))
 DB.setup(:default, db[Rails.env])
+DB.auto_upgrade!
+
+IMG_SIZE = 170
