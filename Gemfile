@@ -9,6 +9,7 @@ gem 'rails', '3.2.2'
 gem "quacks", :git => "git://github.com/simpleprogrammer/Quacks.git"
 gem "omniauth-twitter"
 gem "data_mapper", ">= 1.2.0"
+gem "dm-postgresql-adapter"
 gem "dm-sqlite-adapter"
 
 # Gems used only for assets and not required
