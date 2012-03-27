@@ -1,0 +1,58 @@
+<h1><%= @view.user[:name] %></h1>
+
+<h2>Quotes Added</h2>
+<% @view.quotes.each do |quote| %>
+  <h3><%= link_to quote[:author_name], author_path(quote[:author_id])
+        %></h3>
+  <figure>
+    <img src="<%= quote[:author_img_src] %>" />
+  </figure>
+  <p><%= quote[:text] %></p>
+  <%= form_tag(user_path(user_id), method: "put") do %>
+    <%= hidden_field_tag("quote_id", quote[:id]) %>
+    <%= submit_tag("like") %>
+    <%= quote[:likes] %>
+  <% end %>
+  <%= form_tag(user_path(user_id), method: "put") do %>
+    <%= hidden_field_tag("quote_id", quote[:id]) %>
+    <%= submit_tag("dislike") %>
+    <%= quote[:dislikes] %>
+  <% end %>
+<% end %>
+
+<h2>Quotes Liked</h2>
+<% @view.likes.each do |quote| %>
+  <h3><%= link_to quote[:author_name], author_path(quote[:author_id])
+        %></h3>
+  <img src="<%= quote[:author_img_src] %>" />
+  <p><%= quote[:text] %></p>
+  <%= form_tag(user_path(user_id), method: "put") do %>
+    <%= hidden_field_tag("quote_id", quote[:id]) %>
+    <%= submit_tag("like") %>
+    <%= quote[:likes] %>
+  <% end %>
+  <%= form_tag(user_path(user_id), method: "put") do %>
+    <%= hidden_field_tag("quote_id", quote[:id]) %>
+    <%= submit_tag("dislike") %>
+    <%= quote[:dislikes] %>
+  <% end %>
+<% end %>
+
+<h2>Quotes Disliked</h2>
+<% @view.dislikes.each do |quote| %>
+  <h3><%= link_to quote[:author_name], author_path(quote[:author_id])
+        %></h3>
+  <img src="<%= quote[:author_img_src] %>" />
+  <p><%= quote[:text] %></p>
+  <%= form_tag(user_path(user_id), method: "put") do %>
+    <%= hidden_field_tag("quote_id", quote[:id]) %>
+    <%= submit_tag("like") %>
+    <%= quote[:likes] %>
+  <% end %>
+  <%= form_tag(user_path(user_id), method: "put") do %>
+    <%= hidden_field_tag("quote_id", quote[:id]) %>
+    <%= submit_tag("dislike") %>
+    <%= quote[:dislikes] %>
+  <% end %>
+<% end %>
+
