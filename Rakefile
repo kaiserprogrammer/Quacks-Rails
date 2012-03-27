@@ -9,6 +9,8 @@ QuacksRails::Application.load_tasks
 namespace :db do
   task :migrate do
     require "quacks/persistent"
+    db = YAML.load(File.new(Rails.root + "config/database.yml"))
+    DB.setup(:default, db[Rails.env])
     DataMapper.auto_upgrade!
   end
 end
