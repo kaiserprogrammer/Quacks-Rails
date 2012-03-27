@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/simpleprogrammer/Quacks.git
-  revision: 6a1d0ddbaf1e90b81509e451c50acbde62b8b716
+  revision: db7aea2a8e6359a708712fe1977f2f6190216198
   specs:
     quacks (0.0.2)
-      data_mapper
+      data_mapper (= 1.2.0)
 
 GEM
   remote: https://rubygems.org/
