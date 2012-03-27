@@ -9,6 +9,6 @@ QuacksRails::Application.load_tasks
 namespace :db do
   task :migrate do
     require "quacks/persistent"
-    DB.auto_migrate!
+    DataMapper.auto_upgrade!
   end
 end
