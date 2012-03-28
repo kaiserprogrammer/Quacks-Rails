@@ -1,28 +1,28 @@
-<p id="notice"><%= notice %></p>
-<div class="author">
-  <div class="author_image">
+<div class="thumbnail">
+  <figure>
     <% if @view.author[:img_src] %>
-      <img src="<%= @view.author[:img_src] %>" height="<%= IMG_SIZE %>"/>
+      <img src="<%= @view.author[:img_src] %>" />
     <% else %>
       <%= link_to "Add Image", edit_image_path(@view.author[:id]) %>
     <% end %>
-  </div>
-  <h1><%= @view.author[:name] %></h1>
+    <div class="caption">
+      <div class="well">
+        <h3><%= @view.author[:name] %></h3>
+      </div>
+    </div>
+  </figure>
 </div>
 
 <div class="quotes">
   <% @view.quotes.each do |quote| %>
-  <div class="quote">
-    <h3><%= quote[:text] %></h3>
-    <%= form_tag(user_path(user_id), method: "put") do %>
-      <%= hidden_field_tag("quote_id", quote[:id]) %>
-      <%= submit_tag("like") %>
-      <%= quote[:likes] %>
-    <% end %>
-    <%= form_tag(user_path(user_id), method: "put") do %>
-      <%= hidden_field_tag("quote_id", quote[:id]) %>
-      <%= submit_tag("dislike") %>
-      <%= quote[:dislikes] %>
+  <div class="well quote">
+    <p><%= quote[:text] %></p>
+    <%= form_tag(user_path(user_id), method: "put", class: "form-horizontal") do %>
+      <div class="control-group">
+        <%= hidden_field_tag("quote_id", quote[:id]) %>
+        <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
+        <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
+      </div>
     <% end %>
     Created by <%= link_to quote[:user_name],
     user_path(quote[:user_id]) %>
@@ -33,7 +33,7 @@
   <div class="add_quote">
     <h2>Add Quote</h2>
     <%= form_tag(author_path(@view.author[:id]), :method => "put") do %>
-      <%= text_field_tag(:quote) %>
+      <%= text_area(:quote, :quote) %>
       <%= submit_tag("Add Quote") %>
     <% end %>
   </div>

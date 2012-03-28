@@ -16,9 +16,9 @@ class UsersController < ApplicationController
     type = params[:commit]
     quote_id = params[:quote_id].to_i
     if user_id and quote_id
-      if type == "like"
+      if type =~ /\+/
         t = UserLikesQuote.new(user_id, quote_id, DB.new)
-      elsif type == "dislike"
+      elsif type =~ /\-/
         t = UserDislikesQuote.new(user_id, quote_id, DB.new)
       end
     end

@@ -1,21 +1,20 @@
-<h1>Listing authors</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @view.authors.each do |author| %>
-  <tr>
-    <td><img src="<%= author[:img_src] %>" height="<%= IMG_SIZE %>"/></td>
-    <td><%= link_to author[:name], author_path(author[:id]) %></td>
-    <td><%= author[:quote] %></td>
-  </tr>
-<% end %>
-</table>
-
+<ul class="thumbnails">
+  <% @view.authors.each do |author| %>
+    <li>
+      <figure>
+        <a class="thumbnail" href="<%= author_path(author[:id]) %>">
+          <img src="<%= author[:img_src] %>"/>
+        </a>
+        <div class="caption">
+          <div class="well">
+            <p>
+              <%= author[:quote] %> -- <%= link_to author[:name], author_path(author[:id]) %>
+            </p>
+          </div>
+        </div>
+      </figure>
+    </li>
+  <% end %>
+<ul>
 <br />
-
-<%= link_to 'Add Author', new_author_path %>
+<%= link_to 'Add Author', new_author_path, :class => "btn" %>

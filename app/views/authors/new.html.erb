@@ -1,12 +1,22 @@
-<h1>New author</h1>
-
 <% if user_id %>
-  <%= form_tag(authors_path, :method => "post") do  %>
-    <%= text_field_tag(:name) %>
-    <%= submit_tag("Add Author") %>
+  <%= form_tag(authors_path, :method => "post", html: { class:
+  "form-horizontal" }) do  %>
+  <fieldset>
+    <div class="control-group">
+      <%= label_tag :author, "Name", :class => "control-label" %>
+      <div class="controls">
+        <%= text_field_tag(:author, "", :class => "text_field") %>
+      </div>
+      <div class="form-actions">
+        <%= submit_tag("Add Author", :class => "btn btn-primary") %>
+        <%= link_to "Go Back", authors_path, :class => "btn" %>
+      </div>
+    </div>
+  </fieldset>
   <% end %>
 <% else %>
   You need to be signed in
+  <div class="form-actions">
+    <%= link_to "Go Back", authors_path, :class => "btn" %>
+  </div>
 <% end %>
-
-<%= link_to 'Back', authors_path %>
