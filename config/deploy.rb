@@ -14,7 +14,7 @@ set :scm, :git
 set :repository,  "git@github.com:simpleprogrammer/Quacks-Rails.git"
 
 set :deploy_to, "#{application_dir}"
-set :deploy_via, :copy
+set :deploy_via, :remote_cache
 
 set :domain, "juergenbickert.de"
 role :web, domain                          # Your HTTP server, Apache/etc
@@ -42,14 +42,14 @@ namespace :deploy do
   desc "Start the Thin processes"
   task :start do
     run <<-CMD
-      cd #{application_dir}/current; bundle exec thin restart -e production
+      cd #{application_dir}/current; bundle exec thin start -e production -d
     CMD
   end
 
   desc "Restart the Thin processes"
   task :restart do
     run <<-CMD
-      cd #{application_dir}/current; bundle exec thin restart -e production
+      cd #{application_dir}/current; bundle exec thin restart -e production -d
     CMD
   end
 
