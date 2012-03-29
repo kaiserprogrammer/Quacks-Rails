@@ -16,16 +16,6 @@
           <p>
             <%= author[:quote] %>
           </p>
-          <% if user_id %>
-            <%= form_tag(user_path(user_id), method: "put") do %>
-              <%= hidden_field_tag("quote_id", author[:quote_id]) %>
-              <%= submit_tag("+#{author[:likes]}", class: "btn btn-primary") %>
-              <%= submit_tag("-#{author[:dislikes]}", class: "btn btn-danger") %>
-            <% end %>
-          <% else %>
-            <%= submit_tag("+#{author[:likes]}", class: "btn btn-primary disabled") %>
-            <%= submit_tag("-#{author[:dislikes]}", class: "btn btn-danger disabled") %>
-          <% end %>
         </blockquote>
       </td>
     </tr>
