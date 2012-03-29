@@ -1,16 +1,16 @@
-<div class="thumbnail">
+<a href="<%= edit_image_path(@view.author[:id]) %>" class="thumbnail">
   <figure>
     <% if @view.author[:img_src] %>
       <img src="<%= @view.author[:img_src] %>" />
     <% else %>
       <%= link_to "Add Image", edit_image_path(@view.author[:id]) %>
     <% end %>
-    <div class="caption">
-      <div class="well">
-        <h3><%= @view.author[:name] %></h3>
-      </div>
-    </div>
   </figure>
+</a>
+<div class="caption">
+  <div class="well">
+    <h3><%= @view.author[:name] %></h3>
+  </div>
 </div>
 
 <div class="quotes">
@@ -33,7 +33,7 @@
   <div class="add_quote">
     <h2>Add Quote</h2>
     <%= form_tag(author_path(@view.author[:id]), :method => "put") do %>
-      <%= text_area(:quote, :quote) %>
+      <%= text_area_tag(:quote) %>
       <%= submit_tag("Add Quote") %>
     <% end %>
   </div>
