@@ -1,21 +1,35 @@
-<a href="<%= edit_image_path(@view.author[:id]) %>" class="thumbnail">
-  <figure>
-    <% if @view.author[:img_src] %>
-      <img src="<%= @view.author[:img_src] %>" />
-    <% else %>
-      <%= link_to "Add Image", edit_image_path(@view.author[:id]) %>
-    <% end %>
-  </figure>
-</a>
-<div class="caption">
-  <div class="well">
-    <h3><%= @view.author[:name] %></h3>
-  </div>
-</div>
-
+<table>
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td>
+    <a href="<%= edit_image_path(@view.author[:id]) %>" class="">
+      <div class="">
+        <figure>
+          <% if @view.author[:img_src] %>
+            <img src="<%= @view.author[:img_src] %>" />
+          <% else %>
+            <%= link_to "Add Image", edit_image_path(@view.author[:id]) %>
+          <% end %>
+        </figure>
+      </div>
+    </a>
+    </td>
+      <td>
+      <div class="">
+        <h3><%= @view.author[:name] %></h3>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <div class="quotes">
+  <table class="table table-striped">
+  <thead><tr><td></td></tr></thead>
+  <tbody>
   <% @view.quotes.each do |quote| %>
-  <div class="well quote">
+  <tr><td>
+
     <p><%= quote[:text] %></p>
     <%= form_tag(user_path(user_id), method: "put", class: "form-horizontal") do %>
       <div class="control-group">
@@ -24,19 +38,22 @@
         <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
       </div>
     <% end %>
-    Created by <%= link_to quote[:user_name],
-    user_path(quote[:user_id]) %>
-  </div>
+    <small>Created by <cite><%= link_to quote[:user_name],
+    user_path(quote[:user_id]) %></cite>
+      </small>
+
+  </td></tr>
   <% end %>
+</tbody>
+</table>
 </div>
 <% if user_id %>
   <div class="add_quote">
     <h2>Add Quote</h2>
     <%= form_tag(author_path(@view.author[:id]), :method => "put") do %>
       <%= text_area_tag(:quote) %>
-      <%= submit_tag("Add Quote") %>
+      <%= submit_tag("Add Quote", class: "btn") %>
     <% end %>
   </div>
 <% end %>
-
 <%= link_to 'Back', authors_path %>
