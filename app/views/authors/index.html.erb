@@ -1,14 +1,16 @@
-<% @view.authors.each do |author| %>
 <table>
   <thead></thead>
   <tbody>
+<% @view.authors.each do |author| %>
     <tr>
       <td>
+        <div align="right">
         <figure>
-          <a class="thumbnail" href="<%= author_path(author[:id]) %>">
+          <a class="" href="<%= author_path(author[:id]) %>">
             <img src="<%= author[:img_src] %>"/>
           </a>
         </figure>
+        </div>
       </td>
       <td>
         <h3><%= link_to author[:name], author_path(author[:id]) %></h3>
@@ -19,8 +21,8 @@
         </blockquote>
       </td>
     </tr>
+<% end %>
   </tbody>
 </table>
-<% end %>
 <br />
 <%= link_to 'Add Author', new_author_path, :class => "btn" %>
