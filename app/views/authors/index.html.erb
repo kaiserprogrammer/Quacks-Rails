@@ -1,20 +1,36 @@
-<ul class="thumbnails">
-  <% @view.authors.each do |author| %>
-    <li>
-      <figure>
-        <a class="thumbnail" href="<%= author_path(author[:id]) %>">
-          <img src="<%= author[:img_src] %>"/>
-        </a>
-        <div class="caption">
-          <div class="well">
-            <p>
-              <%= author[:quote] %> -- <%= link_to author[:name], author_path(author[:id]) %>
-            </p>
-          </div>
-        </div>
-      </figure>
-    </li>
-  <% end %>
-<ul>
+<% @view.authors.each do |author| %>
+<table>
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td>
+        <figure>
+          <a class="thumbnail" href="<%= author_path(author[:id]) %>">
+            <img src="<%= author[:img_src] %>"/>
+          </a>
+        </figure>
+      </td>
+      <td>
+        <h3><%= link_to author[:name], author_path(author[:id]) %></h3>
+        <blockquote>
+          <p>
+            <%= author[:quote] %>
+          </p>
+          <% if user_id %>
+            <%= form_tag(user_path(user_id), method: "put") do %>
+              <%= hidden_field_tag("quote_id", author[:quote_id]) %>
+              <%= submit_tag("+#{author[:likes]}", class: "btn btn-primary") %>
+              <%= submit_tag("-#{author[:dislikes]}", class: "btn btn-danger") %>
+            <% end %>
+          <% else %>
+            <%= submit_tag("+#{author[:likes]}", class: "btn btn-primary disabled") %>
+            <%= submit_tag("-#{author[:dislikes]}", class: "btn btn-danger disabled") %>
+          <% end %>
+        </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<% end %>
 <br />
 <%= link_to 'Add Author', new_author_path, :class => "btn" %>
