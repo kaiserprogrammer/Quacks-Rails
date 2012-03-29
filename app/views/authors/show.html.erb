@@ -31,12 +31,19 @@
   <tr><td>
 
     <p><%= quote[:text] %></p>
+    <% if user_id %>
     <%= form_tag(user_path(user_id), method: "put", class: "form-horizontal") do %>
       <div class="control-group">
         <%= hidden_field_tag("quote_id", quote[:id]) %>
         <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
         <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
       </div>
+    <% end %>
+    <% else %>
+      <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary disabled") %>
+      <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger disabled") %>
+      <br />
+      <br />
     <% end %>
     <small>Created by <cite><%= link_to quote[:user_name],
     user_path(quote[:user_id]) %></cite>
