@@ -15,12 +15,17 @@
     </td>
     <td>
       <p><%= quote[:text] %></p>
+      <% if user_id %>
       <%= form_tag(user_path(user_id), method: "put", class: "form-horizontal") do %>
         <div class="control-group">
           <%= hidden_field_tag("quote_id", quote[:id]) %>
           <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
           <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
         </div>
+      <% end %>
+      <% else %>
+        <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
+        <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
       <% end %>
       <small>
         <cite>
@@ -35,6 +40,45 @@
 </div>
 
 <h2>Quotes Liked</h2>
+
+<div class="quotes">
+  <table class="table table-striped">
+  <thead><tr><td></td><td></td></tr></thead>
+  <tbody>
+  <% @view.quotes.each do |quote| %>
+  <tr>
+    <td>
+      <a href="<%= author_path(quote[:author_id]) %>" class="thumbnail">
+        <img src="<%= quote[:author_img_src] %>" />
+      </a>
+    </td>
+    <td>
+      <p><%= quote[:text] %></p>
+      <% if user_id %>
+      <%= form_tag(user_path(user_id), method: "put", class: "form-horizontal") do %>
+        <div class="control-group">
+          <%= hidden_field_tag("quote_id", quote[:id]) %>
+          <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
+          <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
+        </div>
+      <% end %>
+      <% else %>
+        <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
+        <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
+      <% end %>
+      <small>
+        <cite>
+          <%= link_to quote[:author_name], author_path(quote[:author_id]) %>
+        </cite>
+      </small>
+    </td>
+  </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+
+
 <div class="quotes">
   <table class="table table-striped">
   <thead><tr><td></td><td></td></tr></thead>
@@ -48,12 +92,17 @@
     </td>
     <td>
       <p><%= quote[:text] %></p>
+      <% if user_id %>
       <%= form_tag(user_path(user_id), method: "put", class: "form-horizontal") do %>
         <div class="control-group">
           <%= hidden_field_tag("quote_id", quote[:id]) %>
           <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
           <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
         </div>
+      <% end %>
+      <% else %>
+        <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
+        <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
       <% end %>
       <small>
         <cite>
@@ -68,6 +117,7 @@
 </div>
 
 <h2>Quotes Disliked</h2>
+
 <div class="quotes">
   <table class="table table-striped">
   <thead><tr><td></td><td></td></tr></thead>
@@ -81,12 +131,17 @@
     </td>
     <td>
       <p><%= quote[:text] %></p>
+      <% if user_id %>
       <%= form_tag(user_path(user_id), method: "put", class: "form-horizontal") do %>
         <div class="control-group">
           <%= hidden_field_tag("quote_id", quote[:id]) %>
           <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
           <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
         </div>
+      <% end %>
+      <% else %>
+        <%= submit_tag("+#{quote[:likes]}", class: "btn btn-primary") %>
+        <%= submit_tag("-#{quote[:dislikes]}", class: "btn btn-danger") %>
       <% end %>
       <small>
         <cite>
@@ -99,4 +154,3 @@
 </tbody>
 </table>
 </div>
-
