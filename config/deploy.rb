@@ -9,11 +9,12 @@ set :runner, user
 set :use_sudo, false
 
 set :application, "quacks-rails"
+set :application_dir, "/var/www/apps/#{application}"
 set :scm, :git
 set :repository,  "git@github.com:simpleprogrammer/Quacks-Rails.git"
 
-set :deploy_to, "/var/www/apps/#{application}"
-set :deploy_via, :remote_cache
+set :deploy_to, "#{application_dir}"
+set :deploy_via, :copy
 
 set :domain, "juergenbickert.de"
 role :web, domain                          # Your HTTP server, Apache/etc
@@ -36,3 +37,26 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 set :rails_env, "production"
 set :user, "deploy"
 set :runner, user
+
+namespace :deploy do
+  desc "Start the Thin processes"
+  task :start do
+    run <<-CMD
+      cd #{application_dir}/current; bundle exec thin restart -e production
+    CMD
+  end
+
+  desc "Restart the Thin processes"
+  task :restart do
+    run <<-CMD
+      cd #{application_dir}/current; bundle exec thin restart -e production
+    CMD
+  end
+
+  desc "Stop the Thin processes"
+  task :stop do
+    run <<-CMD
+      cd #{application_dir}/current; bundle exec thin stop -e production
+    CMD
+  end
+end
