@@ -59,4 +59,31 @@ namespace :deploy do
       cd #{application_dir}/current; bundle exec thin stop -e production
     CMD
   end
+
+  desc "Forward all http requests on port 80 to rails server on port 3000"
+  task :http_forward_to_rails do
+
+  end
+
+  desc "install rvm on server machine"
+  task :install_rvm do
+    run <<-CMD
+      bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer);
+      source ~/.bashrc;
+      #{install_package(gcc)};
+      #{install_package(zlib)};
+      #{install_package(zlib-devel)};
+      #{install_package(libopenssl-devel)};
+      #{install_package(sqlite3-devel)};
+      rvm install ruby-1.9.3;
+      rvm use ruby-1.9.3 --default;
+      gem install rake;
+      gem install bundler;
+      sudo zypper install postgresql postgresql-devel postgresql-server;
+    CMD
+  end
+
+  def install_package(pkg)
+    "yes | sudo zypper install #{pkg}"
+  end
 end
