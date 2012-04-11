@@ -1,4 +1,8 @@
-<%= form_tag(image_path(@author_id), method: "put") do %>
-  <%= text_field_tag("url") %>
-  <%= submit_tag("Add Image") %>
+<% if user_id %>
+  <%= form_tag(image_path(@author_id), method: "put") do %>
+    <%= text_field_tag("url") %>
+    <%= submit_tag("Add Image") %>
+  <% end %>
+<% else %>
+  <%= link_to "Back", author_path(@author_id) %>
 <% end %>
