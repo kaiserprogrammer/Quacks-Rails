@@ -4,5 +4,6 @@
     <%= submit_tag("Add Image") %>
   <% end %>
 <% else %>
+  <h2>You need to be logged in to change images</h2>
   <%= link_to "Back", author_path(@author_id) %>
 <% end %>
