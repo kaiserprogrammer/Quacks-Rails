@@ -5,8 +5,9 @@
 img {
     height: 170px;
     vertical-align: right;
-    border: 2px solid;
-    padding: 2px
+    -moz-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
 }
 
 td div {
